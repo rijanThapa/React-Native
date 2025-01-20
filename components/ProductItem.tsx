@@ -1,24 +1,26 @@
 import { Link } from "expo-router";
 import { Pressable } from "react-native";
-import { Image } from "./ui/image";
+import { Image } from "./ui/image"; // Assuming you have this
 import { Card } from "./ui/card";
 import { Text } from "./ui/text";
 import { Heading } from "./ui/heading";
 import { VStack } from "./ui/vstack";
 
 export default function ProductListItem({ product }: any) {
+  console.log("Product ID:", product.id); // This should log the correct ID
   return (
-    <Link href="/" asChild>
+    <Link href={`/product/${product.id}`} asChild>
       <Pressable className="flex-1">
-        <Card className="p-5 rounded-lg max-w-[300px]  flex-1">
-          <Image
+        <Card className="p-5 rounded-lg max-w-[300px] flex-1">
+          {/* Uncomment if you want to show the image */}
+          {/* <Image
             source={{
               uri: product.image,
             }}
             className="mb-6 h-[240px] w-full rounded-md"
             alt={product.name}
             resizeMode="contain"
-          />
+          /> */}
           <Text className="text-sm font-normal mb-2 text-typography-700">
             {product.name}
           </Text>
