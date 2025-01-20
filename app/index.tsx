@@ -3,15 +3,22 @@
 import React from "react";
 import { View, Text, Button, StyleSheet, FlatList } from "react-native";
 import { useRouter } from "expo-router";
-import products from "../assets/product.json";
+
 import ProductListItem from "@/components/ProductItem";
+import { useQuery } from "react-query";
+import { productSerive } from "@/api/service/product";
 const Home = () => {
   const router = useRouter();
+  const { data: products } = useQuery(["product"], () =>
+    productSerive.getAllProduct()
+  );
 
+  const productList = products?.data?.data;
+  console.log({ productList });
   return (
     <View>
       <FlatList
-        data={products}
+        data={productList}
         numColumns={2}
         contentContainerClassName="gap-2"
         columnWrapperClassName="gap-2"
