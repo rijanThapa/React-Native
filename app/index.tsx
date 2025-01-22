@@ -14,7 +14,6 @@ const Home = () => {
   );
 
   const productList = products?.data?.data;
-  console.log({ productList });
   return (
     <View>
       <FlatList
