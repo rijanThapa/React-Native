@@ -44,9 +44,8 @@ const Login = () => {
       dispatch(loginRequest());
     },
     onSuccess: (response) => {
-      dispatch(loginSuccess(response)); // Dispatch the entire Axios response object
+      dispatch(loginSuccess(response));
       router.push("/");
-      console.log(response); // Navigate to home page on success
     },
     onError: (error: any) => {
       dispatch(loginFailure(error.message));
@@ -54,7 +53,7 @@ const Login = () => {
   });
 
   const onSubmit = (data: LoginFormInputs) => {
-    mutation.mutate(data); // Submit the login data
+    mutation.mutate(data);
   };
 
   return (
