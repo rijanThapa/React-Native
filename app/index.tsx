@@ -6,11 +6,12 @@ import { useRouter } from "expo-router";
 
 import ProductListItem from "@/components/ProductItem";
 import { useQuery } from "react-query";
-import { productSerive } from "@/api/service/product";
+import { productService } from "@/api/service/product";
+
 const Home = () => {
   const router = useRouter();
   const { data: products } = useQuery(["product"], () =>
-    productSerive.getAllProduct()
+    productService.getAllProduct()
   );
 
   const productList = products?.data?.data;
