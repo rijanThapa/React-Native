@@ -34,6 +34,22 @@ const Layout = () => {
                 headerShown: false,
               }}
             />
+            <Tabs.Screen
+              name="login"
+              options={{
+                tabBarStyle: { display: "none" },
+                tabBarButton: () => null,
+                headerShown: false,
+              }}
+            />
+
+            <Tabs.Screen
+              name="product/[productId]"
+              options={{
+                tabBarButton: () => null,
+                headerShown: false,
+              }}
+            />
           </Tabs>
         </QueryClientProvider>
       </GluestackUIProvider>
