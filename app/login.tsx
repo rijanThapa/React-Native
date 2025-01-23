@@ -14,6 +14,7 @@ import {
 } from "@/store/slices/userSlice";
 import { useMutation } from "react-query";
 import { login } from "@/api/service/authService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const schema = z.object({
   email: z.string().email("Invalid email address"),
@@ -45,6 +46,10 @@ const Login = () => {
     },
     onSuccess: (response) => {
       dispatch(loginSuccess(response));
+      console.log("aaa", response?.data?.id);
+      AsyncStorage.setItem("token", response?.data?.jwt_token);
+      AsyncStorage.setItem("userId", String(response?.data?.id));
+
       router.push("/");
     },
     onError: (error: any) => {

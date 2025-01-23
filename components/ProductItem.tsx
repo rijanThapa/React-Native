@@ -7,7 +7,7 @@ import { Heading } from "./ui/heading";
 import { VStack } from "./ui/vstack";
 
 export default function ProductListItem({ product }: any) {
-  const router = useRouter();
+  const router = useRouter(); // This should be directly inside the function
 
   const handlePress = () => {
     router.push(`/product/${product.id}`);
