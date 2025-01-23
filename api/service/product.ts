@@ -16,7 +16,7 @@ const getProductById = async (productId: number) => {
     throw error;
   }
 };
-export const productSerive = {
+export const productService = {
   getAllProduct,
   getProductById,
 };
