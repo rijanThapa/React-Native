@@ -87,6 +87,7 @@ const CartScreen = () => {
           name={item?.product?.name}
           price={item?.product?.price}
           quantity={item.quantity}
+          totalQuantity={item.product?.quantity}
         />
       )}
     />
