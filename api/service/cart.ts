@@ -16,7 +16,27 @@ const getAddToCartItem = async (userId: number) => {
     throw error;
   }
 };
+const incrementCartItem = async (cartId: number) => {
+  console.log(cartId);
+  try {
+    const response = await api.patch(`/cart-item/increment/${cartId}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+const decrementCartItem = async (cartId: number) => {
+  console.log(cartId);
+  try {
+    const response = await api.patch(`/cart-item/decrement/${cartId}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 export const cartService = {
   addToCart,
   getAddToCartItem,
+  incrementCartItem,
+  decrementCartItem,
 };
