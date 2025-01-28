@@ -1,8 +1,8 @@
 // app/index.tsx
 
-import React from "react";
+import React, { useCallback } from "react";
 import { View, Text, Button, StyleSheet, FlatList } from "react-native";
-import { useRouter } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 
 import ProductListItem from "@/components/ProductItem";
 import { useQuery } from "react-query";
@@ -10,10 +10,15 @@ import { productService } from "@/api/service/product";
 
 const Home = () => {
   const router = useRouter();
-  const { data: products } = useQuery(["product"], () =>
+  const { data: products, refetch } = useQuery(["product"], () =>
     productService.getAllProduct()
   );
-
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch])
+  );
+  console.log("home");
   const productList = products?.data?.data;
   return (
     <View>
