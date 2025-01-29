@@ -10,7 +10,7 @@ const addToCart = async (userId: number, payload: number) => {
 };
 const getAddToCartItem = async (userId: number) => {
   try {
-    const response = await api.get(`/cart-item/${userId}`);
+    const response: any = await api.get(`/cart-item/${userId}`);
     return response;
   } catch (error) {
     throw error;
