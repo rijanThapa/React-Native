@@ -80,7 +80,7 @@ const CartItem: React.FC<CartItemProps> = ({
       />
       <Box>
         <Text className="text-lg font-bold">{name}</Text>
-        <Text className="text-sm text-red-600">Rs. {price.toFixed(2)}</Text>
+        <Text className="text-sm text-red-400">Rs. {price.toFixed(2)}</Text>
         <Box className="flex flex-row items-center gap-2 mt-2">
           <Button
             className="px-3 text-lg bg-gray-200"
