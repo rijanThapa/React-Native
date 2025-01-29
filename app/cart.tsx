@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SplashScreen } from "expo-router";
 import { useFocusEffect } from "@react-navigation/native";
 import { Box } from "@/components/ui/box";
+import { Button, ButtonText } from "@/components/ui/button";
 
 // Fetch userId from AsyncStorage
 const getUserId = async () => {
@@ -56,7 +57,7 @@ const CartScreen = () => {
   if (isLoading) {
     return <Text>Loading cart...</Text>;
   }
-  console.log("cart");
+
   if (isError) {
     return (
       <Box className="flex-1 justify-center items-center p-4">
@@ -74,23 +75,40 @@ const CartScreen = () => {
     );
   }
 
-  // Render cart items
+  const totalPrice: any = cartResponse.data.cartItems.reduce(
+    (total: any, item: any) => {
+      return total + item.product.price * item.quantity;
+    },
+    0
+  );
+
   return (
-    <FlatList
-      data={cartResponse?.data?.cartItems}
-      keyExtractor={(item) => item.id.toString()}
-      renderItem={({ item }) => (
-        <CartItem
-          key={item.id}
-          id={item.id}
-          imageUrl={item?.product?.image}
-          name={item?.product?.name}
-          price={item?.product?.price}
-          quantity={item.quantity}
-          totalQuantity={item.product?.quantity}
-        />
-      )}
-    />
+    <>
+      <FlatList
+        data={cartResponse?.data?.cartItems}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <CartItem
+            key={item.id}
+            id={item.id}
+            imageUrl={item?.product?.image}
+            name={item?.product?.name}
+            price={item?.product?.price}
+            quantity={item.quantity}
+            totalQuantity={item.product?.quantity}
+          />
+        )}
+      />
+      <Box className="bg-white m-3 p-4 rounded-lg flex flex-row justify-between">
+        <>
+          <Text className="text-lg">
+            Total Price: Rs
+            <Text className="text-red-300"> {totalPrice.toFixed(2)}</Text>
+          </Text>
+        </>
+        <Text>Buy now</Text>
+      </Box>
+    </>
   );
 };
 
