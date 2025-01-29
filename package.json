@@ -15,6 +15,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo-google-fonts/poppins": "^0.2.3",
     "@expo/html-elements": "^0.4.2",
     "@expo/vector-icons": "^14.0.2",
     "@gluestack-ui/button": "^1.0.8",
@@ -49,6 +50,7 @@
     "react-native": "0.76.6",
     "react-native-css-interop": "^0.1.22",
     "react-native-gesture-handler": "~2.20.2",
+    "react-native-google-fonts": "^0.0.0",
     "react-native-reanimated": "~3.16.1",
     "react-native-safe-area-context": "^5.1.0",
     "react-native-screens": "~4.4.0",
