@@ -26,7 +26,6 @@ const incrementCartItem = async (cartId: number) => {
   }
 };
 const decrementCartItem = async (cartId: number) => {
-  console.log(cartId);
   try {
     const response = await api.patch(`/cart-item/decrement/${cartId}`);
     return response;
@@ -34,9 +33,22 @@ const decrementCartItem = async (cartId: number) => {
     throw error;
   }
 };
+
+//delete item
+const removeCartItem = async (userId: number, cartId: number) => {
+  console.log({ cartId });
+  try {
+    const response = await api.delete(`/cart-item/${userId}/${cartId}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const cartService = {
   addToCart,
   getAddToCartItem,
   incrementCartItem,
   decrementCartItem,
+  removeCartItem,
 };
