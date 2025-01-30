@@ -18,7 +18,6 @@ const Home = () => {
       refetch();
     }, [refetch])
   );
-  console.log("home");
   const productList = products?.data?.data;
   return (
     <View>

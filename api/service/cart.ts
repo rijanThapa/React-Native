@@ -17,7 +17,6 @@ const getAddToCartItem = async (userId: number) => {
   }
 };
 const incrementCartItem = async (cartId: number) => {
-  console.log(cartId);
   try {
     const response = await api.patch(`/cart-item/increment/${cartId}`);
     return response;
@@ -36,7 +35,6 @@ const decrementCartItem = async (cartId: number) => {
 
 //delete item
 const removeCartItem = async (userId: number, cartId: number) => {
-  console.log({ cartId });
   try {
     const response = await api.delete(`/cart-item/${userId}/${cartId}`);
     return response;

@@ -46,7 +46,6 @@ const Login = () => {
     },
     onSuccess: (response) => {
       dispatch(loginSuccess(response));
-      console.log("aaa", response?.data?.id);
       AsyncStorage.setItem("token", response?.data?.jwt_token);
       AsyncStorage.setItem("userId", String(response?.data?.id));
 

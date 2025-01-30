@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import { Button, ButtonText } from "@/components/ui/button";
@@ -30,7 +30,9 @@ const CartItem: React.FC<CartItemProps> = ({
   const queryClient = useQueryClient();
   const [itemQuantity, setItemQuantity] = useState(quantity);
   const [isOutOfStock, setIsOutOfStock] = useState(false);
-
+  useEffect(() => {
+    setItemQuantity(quantity);
+  }, [quantity]);
   const { mutate } = useMutation(
     (id: string) => cartService.incrementCartItem(Number(id)),
     {
@@ -89,7 +91,7 @@ const CartItem: React.FC<CartItemProps> = ({
   };
 
   const handleRemove = () => {
-    removeItem(id); // Call mutation to remove item from the cart
+    removeItem(id);
   };
 
   return (
@@ -102,7 +104,7 @@ const CartItem: React.FC<CartItemProps> = ({
       <Box className="flex-1">
         <Text className="text-lg font-bold">{name}</Text>
         <Text className="text-sm text-red-400">Rs. {price.toFixed(2)}</Text>
-        <Box className="flex flex-row mt-2 justify-between ">
+        <Box className="flex flex-row mt-2 justify-between">
           <Box className="flex flex-row items-center gap-2 ">
             <Button
               className="px-3 text-lg bg-gray-200"
