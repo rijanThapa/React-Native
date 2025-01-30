@@ -90,6 +90,7 @@ const CartScreen = () => {
         renderItem={({ item }) => (
           <CartItem
             key={item.id}
+            userId={userId}
             id={item.id}
             imageUrl={item?.product?.image}
             name={item?.product?.name}
