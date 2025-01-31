@@ -8,8 +8,13 @@ import { Image } from "@/components/ui/image";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useRouter, useLocalSearchParams, Stack } from "expo-router";
-import React, { useEffect, useState } from "react";
+import {
+  useRouter,
+  useLocalSearchParams,
+  Stack,
+  useFocusEffect,
+} from "expo-router";
+import React, { useCallback, useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 
 const ProductDetails = () => {
@@ -25,14 +30,13 @@ const ProductDetails = () => {
 
       setToken(storedToken);
       setUserId(storedUserId ? parseInt(storedUserId) : null);
-
-      if (!storedToken) {
-        router.replace("/login");
-      }
     };
 
     fetchData();
   }, [router]);
+  if (!token) {
+    router.push("/login");
+  }
 
   const { data: product, isLoading } = useQuery(["productId", productId], () =>
     productService.getProductById(Number(productId))
@@ -70,7 +74,6 @@ const ProductDetails = () => {
       console.log("User not authenticated");
     }
   };
-  console.log({ token });
   return (
     <Box className="flex-1 item-centre p-8">
       <Stack.Screen options={{ title: productDetails?.name }} />

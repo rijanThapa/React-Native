@@ -18,7 +18,6 @@ const getUserId = async () => {
 const CartScreen = () => {
   const [userId, setUserId] = useState<number | null>(null);
 
-  // Fetch userId on component mount
   useEffect(() => {
     const initializeUserId = async () => {
       const id = await getUserId();
@@ -28,19 +27,17 @@ const CartScreen = () => {
     initializeUserId();
   }, []);
 
-  // Query to fetch cart data
   const {
     data: cartResponse,
     isLoading,
     isError,
     refetch,
   } = useQuery(["cart", userId], () => cartService.getAddToCartItem(userId!), {
-    enabled: !!userId, // Fetch cart only if userId is available
-    staleTime: 0, // Disable caching
-    cacheTime: 0, // Disable cache
+    enabled: !!userId,
+    staleTime: 0,
+    cacheTime: 0,
   });
 
-  // Trigger refetch when screen is focused
   useFocusEffect(
     useCallback(() => {
       if (userId) {
@@ -49,7 +46,6 @@ const CartScreen = () => {
     }, [userId, refetch])
   );
 
-  // Handle loading, error, and empty cart states
   if (userId === null) {
     return <Text>Loading user data...</Text>;
   }
