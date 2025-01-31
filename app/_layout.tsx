@@ -7,6 +7,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import store from "@/store/store";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 const queryClient = new QueryClient();
 const Layout = () => {
   return (
@@ -57,6 +58,23 @@ const Layout = () => {
               options={{
                 tabBarButton: () => null,
                 headerShown: false,
+              }}
+            />
+            <Tabs.Screen
+              name="profile"
+              options={{
+                title: "Profile",
+                tabBarIcon: ({ color }) => (
+                  <Avatar className="w-[20px] h-[20px]">
+                    <AvatarImage
+                      source={{
+                        uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                      }}
+                      height={20}
+                      width={20}
+                    />
+                  </Avatar>
+                ),
               }}
             />
           </Tabs>
