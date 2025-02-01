@@ -1,28 +1,42 @@
+import React from "react";
+import { FlatList, Text } from "react-native";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Box } from "@/components/ui/box";
-import { Button, ButtonText } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Image } from "@/components/ui/image";
 import ProfileItem from "@/components/ui/ProfileItem";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { router } from "expo-router";
 import { useGetCurrentUserInfo } from "@/hooks/useGetCurrentUserInfo";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import React from "react";
-import { FlatList, Text, View } from "react-native";
-
+import * as Updates from "expo-updates";
 const Profile = () => {
   const { data: userInfo } = useGetCurrentUserInfo();
   const userDetails = userInfo?.data?.data?.user;
+  console.log({ userDetails });
+
+  const handleLogout = async () => {
+    try {
+      // Remove token and userId from AsyncStorage
+      await AsyncStorage.removeItem("token");
+      await AsyncStorage.removeItem("userId");
+      await Updates.reloadAsync();
+      // Navigate to login screen
+      router.push("/login");
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+
   const profileItems = [
     { label: "Phone No", value: userDetails?.phoneNumber },
     { label: "Gender", value: "Male" },
     { label: "Change Password", isAction: true },
     { label: "Edit Profile", isAction: true },
-    { label: "Logout", isAction: true },
+    { label: "Logout", isAction: true, action: handleLogout },
   ];
+
   return (
     <Box className="flex flex-col justify-evenly">
-      <Box className=" p-4 ">
-        <Box className="p-5 rounded-lg flex items-center ">
+      <Box className="p-4">
+        <Box className="p-5 rounded-lg flex items-center">
           <Avatar className="h-[120px] w-[120px]">
             <AvatarImage
               source={{
@@ -40,7 +54,7 @@ const Profile = () => {
       <Box className="mt-4 p-4">
         <FlatList
           data={profileItems}
-          keyExtractor={(index) => index.toString()}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => <ProfileItem item={item} />}
         />
       </Box>
