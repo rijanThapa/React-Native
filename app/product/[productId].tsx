@@ -29,16 +29,24 @@ const ProductDetails = () => {
       const storedUserId = await AsyncStorage.getItem("userId");
 
       setToken(storedToken);
+
       setUserId(storedUserId ? parseInt(storedUserId) : null);
     };
 
     fetchData();
   }, [router]);
-  if (!token) {
-    router.push("/login");
-  }
 
-  const { data: product, isLoading } = useQuery(["productId", productId], () =>
+  useEffect(() => {
+    if (!token) {
+      router.push("/login");
+    }
+  }, [token]);
+  console.log({ token });
+  const {
+    data: product,
+    isLoading,
+    refetch,
+  } = useQuery(["productId", productId], () =>
     productService.getProductById(Number(productId))
   );
 
@@ -54,6 +62,11 @@ const ProductDetails = () => {
     }
   );
 
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [token, refetch])
+  );
   if (isLoading) {
     return <Text>Loading...</Text>;
   }
