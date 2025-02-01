@@ -1,8 +1,8 @@
 // ProfileItem.tsx
 
 import React from "react";
-import { Text, View } from "react-native";
-import { Card } from "./card"; 
+import { Text, TouchableOpacity, View } from "react-native";
+import { Card } from "./card";
 import { Box } from "./box";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
@@ -11,6 +11,7 @@ interface ProfileItemProps {
     label: string;
     value?: string;
     isAction?: boolean;
+    action?: () => void;
   };
 }
 
@@ -21,7 +22,9 @@ const ProfileItem: React.FC<ProfileItemProps> = ({ item }) => {
       <Box className="flex flex-row justify-between p-1 ">
         <Text>{item.label}</Text>
         {item.isAction ? (
-          <MaterialIcons name="arrow-forward-ios" size={18} />
+          <TouchableOpacity onPress={item?.action}>
+            <MaterialIcons name="arrow-forward-ios" size={18} />
+          </TouchableOpacity>
         ) : (
           <Text className="text-gray-300">{item.value}</Text>
         )}
