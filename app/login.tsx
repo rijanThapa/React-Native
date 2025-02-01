@@ -1,4 +1,3 @@
-// Login.tsx
 import React from "react";
 import { View, TextInput, Button, Text, StyleSheet } from "react-native";
 import { useForm, Controller } from "react-hook-form";
@@ -46,9 +45,12 @@ const Login = () => {
     },
     onSuccess: (response) => {
       dispatch(loginSuccess(response));
+
+      // Store token and userId in AsyncStorage
       AsyncStorage.setItem("token", response?.data?.jwt_token);
       AsyncStorage.setItem("userId", String(response?.data?.id));
 
+      // Navigate to home screen after successful login
       router.push("/");
     },
     onError: (error: any) => {
