@@ -26,7 +26,7 @@ const CartScreen = () => {
 
     initializeUserId();
   }, []);
-
+  console.log({ userId });
   const {
     data: cartResponse,
     isLoading,
@@ -40,10 +40,9 @@ const CartScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
-      if (userId) {
         refetch();
-      }
-    }, [userId, refetch])
+      
+    }, [ refetch])
   );
 
   if (userId === null) {
