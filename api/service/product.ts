@@ -16,7 +16,21 @@ const getProductById = async (productId: number) => {
     throw error;
   }
 };
+
+const addProduct = async (payload: FormData) => {
+  try {
+    const response = await api.post(`/product`, payload, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 export const productService = {
   getAllProduct,
   getProductById,
+  addProduct,
 };
