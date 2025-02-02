@@ -2,7 +2,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { router } from "expo-router";
 
-const BASE_URL = "https://b83a-38-255-148-138.ngrok-free.app";
+const BASE_URL =
+  "https://9929-2400-1a00-b060-e8df-2592-c610-f7c0-2d00.ngrok-free.app";
 
 const getTokenFromStorage = async () => {
   return await AsyncStorage.getItem("token");
