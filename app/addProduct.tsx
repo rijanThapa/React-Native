@@ -122,8 +122,9 @@ const FormComponent = () => {
             <Controller
               control={control}
               render={({ field: { onChange, value } }) => (
-                <Input variant="outline" size="md" className="mt-2">
+                <Input variant="outline" size="lg" className="mt-2">
                   <InputField
+                    size="md"
                     style={{ height: 50 }}
                     placeholder="Enter the product name"
                     value={value}
@@ -141,7 +142,7 @@ const FormComponent = () => {
             <Controller
               control={control}
               render={({ field: { onChange, value } }) => (
-                <Input className="mt-2" variant="outline" size="md">
+                <Input className="mt-2" variant="outline" size="lg">
                   <InputField
                     style={{ height: 50 }}
                     placeholder="Enter the product price"
@@ -185,7 +186,7 @@ const FormComponent = () => {
             <Controller
               control={control}
               render={({ field: { onChange, value } }) => (
-                <Input className="mt-2" variant="outline" size="md">
+                <Input className="mt-2" variant="outline" size="lg">
                   <InputField
                     style={{ height: 50 }}
                     placeholder="Enter product quantity"
