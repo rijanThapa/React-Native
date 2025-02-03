@@ -38,6 +38,15 @@ const Layout = () => {
               }}
             />
             <Tabs.Screen
+              name="addProduct"
+              options={{
+                title: "Add Product",
+                tabBarIcon: ({ color }) => (
+                  <MaterialIcons name="add" size={24} color={color} />
+                ),
+              }}
+            />
+            <Tabs.Screen
               name="+not-found"
               options={{
                 tabBarButton: () => null,
