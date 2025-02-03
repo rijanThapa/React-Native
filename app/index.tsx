@@ -20,7 +20,7 @@ const Home = () => {
   );
   const productList = products?.data?.data;
   return (
-    <View>
+    <View className="p-4">
       <FlatList
         data={productList}
         numColumns={2}

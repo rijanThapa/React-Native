@@ -29,19 +29,12 @@ const ProductDetails = () => {
       const storedUserId = await AsyncStorage.getItem("userId");
 
       setToken(storedToken);
-
       setUserId(storedUserId ? parseInt(storedUserId) : null);
     };
 
     fetchData();
   }, [router]);
 
-  useEffect(() => {
-    if (!token) {
-      router.push("/login");
-    }
-  }, [token]);
-  console.log({ token });
   const {
     data: product,
     isLoading,
@@ -67,49 +60,52 @@ const ProductDetails = () => {
       refetch();
     }, [token, refetch])
   );
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
 
   const productDetails = product?.data?.data;
-
   const imageSource = productDetails?.image
     ? { uri: productDetails.image }
     : "";
 
   const handleAddToCart = () => {
-    if (userId) {
+    if (userId && token) {
       const payload = {
         productId: productDetails?.id,
       };
       mutation.mutate(payload);
     } else {
-      console.log("User not authenticated");
+      router.navigate("/login");
     }
   };
+
+  if (isLoading) {
+    return <Text>Loading...</Text>;
+  }
+
   return (
-    <Box className="flex-1 item-centre p-8">
+    <Box className="flex-1 item-centre p-3">
       <Stack.Screen options={{ title: productDetails?.name }} />
 
-      <Card className="p-5 rounded-lg max-w-[360px] m-3">
+      <Card className="p-5 rounded-lg max-w-[360px] m-1">
         <Image
           source={imageSource}
           resizeMode="contain"
           className="mb-6 h-[240px] w-full rounded-md"
         />
 
-        <Text className="text-sm font-normal mb-2 text-typography-700">
+        <Text className="text-1xl font-normal mb-2 text-typography-700 ">
           {productDetails?.name}
         </Text>
         <VStack className="mb-6">
-          <Heading size="md" className="mb-4">
-            {productDetails?.price}
+          <Heading size="md" className="mb-4 text-green-600">
+            Rs. {productDetails?.price}
           </Heading>
-          <Text size="sm">{productDetails?.description}</Text>
+          <Text size="sm" className="text-gray-400">
+            {productDetails?.description}
+          </Text>
         </VStack>
         <Box className="flex-col sm:flex-row">
           <Button
-            className="px-4 py-2 mr-0 mb-3 sm:mr-3 sm:mb-0 sm:flex-1"
+            className="px-4 py-2 mr-0 mb-3 sm:mr-3 sm:mb-0 sm:flex-1 bg-blue-700"
             onPress={handleAddToCart}
           >
             <ButtonText size="sm">Add to cart</ButtonText>
