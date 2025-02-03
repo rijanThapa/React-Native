@@ -15,20 +15,20 @@ export default function ProductListItem({ product }: any) {
 
   return (
     <Pressable className="flex-1" onPress={handlePress}>
-      <Card className="p-5 rounded-lg max-w-[300px] flex-1">
+      <Card className=" rounded-lg max-w-[300px] h-auto flex-1">
         <Image
           source={{
             uri: product.image,
           }}
-          className="mb-6 h-[240px] w-full rounded-md"
+          className="mb-6 h-[150px] w-full rounded-md object-cover"
           alt={product.name}
           resizeMode="contain"
         />
         <Text className="text-sm font-normal mb-2 text-typography-700">
           {product.name}
         </Text>
-        <VStack className="mb-6">
-          <Heading size="md" className="mb-4">
+        <VStack className="">
+          <Heading size="md" className="">
             {product.price}
           </Heading>
         </VStack>
